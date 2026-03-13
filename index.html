@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time API Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center">
+    <div class="bg-slate-800 p-8 rounded-2xl shadow-2xl border border-slate-700 w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-cyan-400 text-center">Current Time</h1>
+        
+        <div class="space-y-4">
+            <div class="bg-slate-700 p-4 rounded-lg">
+                <p class="text-xs text-slate-400 uppercase tracking-widest">Japan Standard Time</p>
+                <p id="jst-time" class="text-2xl font-mono text-cyan-300">Loading...</p>
+            </div>
+            
+            <div class="bg-slate-700 p-4 rounded-lg">
+                <p class="text-xs text-slate-400 uppercase tracking-widest">Coordinated Universal Time</p>
+                <p id="utc-time" class="text-2xl font-mono text-slate-300">Loading...</p>
+            </div>
+        </div>
+
+        <button onclick="fetchTime()" class="mt-8 w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-lg transition-all shadow-lg active:scale-95">
+            UPDATE NOW
+        </button>
+    </div>
+
+    <script>
+        async function fetchTime() {
+            // あなたのRenderのURLに書き換えてください
+            const response = await fetch('https://time-api-practice.onrender.com/');
+            const data = await response.json();
+            document.getElementById('jst-time').innerText = data.times.JST;
+            document.getElementById('utc-time').innerText = data.times.UTC;
+        }
+        // 最初の一回を実行
+        fetchTime();
+    </script>
+</body>
+</html>
