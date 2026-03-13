@@ -13,4 +13,5 @@ COPY main.py .
 
 # 5. コンテナが起動した時に実行するコマンド
 # ポート8080で待ち受け、すべてのIPからの接続を許可（0.0.0.0）に設定
-CMD ["uvicorn", "main.py", "--host", "0.0.0.0", "--port", "8080"]
+#CMD ["uvicorn", "main.py", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080}"]
